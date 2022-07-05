@@ -30,6 +30,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+LOGIN_REDIRECT_URL = 'dashboard' # адрес, куда Django будет перенаправлять пользователя при успешной авторизации, если не указан GET-параметр next
+LOGIN_URL = 'login' # адрес, куда нужно перенаправлять пользователя для входа в систему
+LOGOUT_URL = 'logout'
+
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'django.contrib.admin',
