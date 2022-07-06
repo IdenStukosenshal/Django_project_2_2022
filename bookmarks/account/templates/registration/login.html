@@ -17,6 +17,8 @@
       <input type="hidden" name="next" value="{{ next }}" /> <!--next должен быть корректным URL’ом. Если он указан, обработчик логина Django перенаправит пользователя по этому URL’у после успешной авторизации.-->
       <p><input type="submit" value="Log-in"></p>
     </form>
+    <p><a href="{% url 'password_reset' %}">Forgott ur pass?</a> </p>
   </div>
+
 
 {% endblock %}

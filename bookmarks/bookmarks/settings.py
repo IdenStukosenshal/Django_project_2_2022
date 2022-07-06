@@ -34,6 +34,9 @@ LOGIN_REDIRECT_URL = 'dashboard' # адрес, куда Django будет пер
 LOGIN_URL = 'login' # адрес, куда нужно перенаправлять пользователя для входа в систему
 LOGOUT_URL = 'logout'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# отправка сообщений в консоль  вместо использования SMTP-сервера.
+
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'django.contrib.admin',
