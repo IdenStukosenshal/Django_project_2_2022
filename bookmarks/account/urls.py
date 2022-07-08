@@ -17,6 +17,9 @@ urlpatterns = [
     path('password_reset/done',auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    # имена шаблонов url и имена файлов прописаны в django.contrib.auth.views, эти паттерны прописаны в django.contrib.auth.urls.py
+
+    path('register/', views.register, name='register')
 
 
 ]

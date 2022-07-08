@@ -7,7 +7,8 @@
   {% if form.errors %} <!--По умолчанию Django использует форму Authentication Form из модуля django.contrib.auth.forms-->
     <p>Your username and password didn't match. Please try again.</p>
   {% else %}
-    <p>Please, use the following form to log-in:</p>
+    <p>Please, use the following form to log-in.
+      If u don't have an account <a href="{% url 'register' %}">register here</a>:</p>
   {% endif %}
 
   <div class="login-form">
