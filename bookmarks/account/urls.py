@@ -19,7 +19,7 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     # имена шаблонов url и имена файлов прописаны в django.contrib.auth.views, эти паттерны прописаны в django.contrib.auth.urls.py
 
-    path('register/', views.register, name='register')
+    path('register/', views.register, name='register'),
 
 
 ]
