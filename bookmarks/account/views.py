@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
-from .forms import LoginForm, UserRegistrationForm
+from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
+from .models import Profile
 
 from django.contrib.auth.decorators import login_required
 
@@ -28,22 +29,47 @@ def user_login(request):   # Сейчас это не используется
 def dashboard(request):
     return render(request, 'account/dashboard.html', {'section': 'dashboard'})
 
+
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
+        profile_form = ProfileEditForm(data=request.POST, files=request.FILES)
+
+        if user_form.is_valid() and profile_form.is_valid():
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data['password']) # Вместо сохранения пароля пользователя «как есть», мы используем метод set_password() модели User. Он сохранит пароль в зашифрованном виде
+
             new_user.save()
-            return render(request, 'account/register_done.html', {'new_user': new_user})
+            #new_user.refresh_from_db()
+
+            new_profile = Profile.objects.create(user=new_user, photo=request.FILES['photo'])
+            new_profile.save()
+            # учебнике в этом месте ошибка, https://ru.stackoverflow.com/questions/923667/%D0%A0%D0%B0%D1%81%D1%88%D0%B8%D1%80%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F-%D1%80%D0%B5%D0%B3%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B2-django-2-1
+
+            return render(request, 'account/register_done.html', {'new_user': new_user, 'new_profile': new_profile})
     else:
         user_form = UserRegistrationForm()
-    return render(request, 'account/register.html', {'user_form': user_form})
+        profile_form = ProfileEditForm()
+    return render(request, 'account/register.html', {'user_form': user_form, 'profile_form': profile_form})
+
+
+@login_required
+def edit(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        profile_form = ProfileEditForm(instance=request.user.profile, data=request.POST, files=request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+    return render(request, 'account/edit.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
 
 
 
 """Список возможных вопросов:
-* Зачем создаётся object = None?
+* Зачем иногда создаётся object = None, а иногда нет?
 * """

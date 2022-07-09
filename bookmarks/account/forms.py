@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
-import django.contrib.auth.forms
+from .models import Profile
+
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=30)
     password = forms.CharField(widget=forms.PasswordInput) # используем виджет PasswordInput, который будет сформирован в HTML как элемент <input> с атрибутом type="password", поэтому браузер будет работать с ним как с полем пароля
@@ -18,3 +19,14 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Passwords don\'t match.')
         return cd['password2']
+
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('date_of_birth', 'photo')

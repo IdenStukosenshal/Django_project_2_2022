@@ -20,6 +20,7 @@ urlpatterns = [
     # имена шаблонов url и имена файлов прописаны в django.contrib.auth.views, эти паттерны прописаны в django.contrib.auth.urls.py
 
     path('register/', views.register, name='register'),
+    path('edit/', views.edit, name='edit'),
 
 
 ]
