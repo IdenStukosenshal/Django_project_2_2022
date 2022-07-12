@@ -37,6 +37,11 @@ LOGOUT_URL = 'logout'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # отправка сообщений в консоль  вместо использования SMTP-сервера.
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  #Используются по порядку, если один не вернёт пользователя, идёт следующий
+    'account.authentication.EmailAuthBackend',
+]
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
