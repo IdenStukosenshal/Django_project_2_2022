@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-+4+)w_&+*7^5q8&401!0(!8m9p^fo4ju9=*(6u0-u*@ukvy5@&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [
+    'mysite.com',
+    'localhost',
+    '127.0.0.1',
+    'bdff-212-164-204-167.eu.ngrok.io', ]
 
 
 # Application definition
@@ -57,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social_django',
+    'images.apps.ImagesConfig',
 ]
 
 MIDDLEWARE = [
