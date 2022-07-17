@@ -9,7 +9,7 @@ class ImageCreateForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = ('title', 'url', 'description')
-        #widgets = {'url': forms.HiddenInput, }  # Поле url не будет видно пользователю
+        #widgets = {'url': forms.HiddenInput, }  # Поле url не будет видно пользователю  !Раскомментить, если "альтернативное" добавление будет работать!
 
     def clean_url(self):
         """возможность проверять каждое поле формы по отдельности с помощью мето-

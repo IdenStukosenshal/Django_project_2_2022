@@ -17,7 +17,7 @@ def image_create(request):
             new_item.user = request.user
             new_item.save()
             messages.success(request, 'Image added')
-            return redirect(new_item.get_absolute_url())
+            return redirect(new_item.get_absolute_url())  #views (redirect) -> models (get_abs_url) -> urls -> views(img_detail)
     else:
         # Заполняем форму данными из GET-запроса
         form = ImageCreateForm(data=request.GET)
