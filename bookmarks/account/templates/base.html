@@ -20,6 +20,9 @@
           <li {% if section == "people" %}class="selected"{% endif %}>
             <a href="#">People</a>
           </li>
+          <li {% if section == "TEST_ADD_PICTURE" %}class="selected"{% endif %}>
+            <a href="{% url 'images:create' %}">TEST_ADD_PICTURE</a>
+          </li>
         </ul>
       {% endif %}
 
