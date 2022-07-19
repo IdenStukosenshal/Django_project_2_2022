@@ -49,6 +49,9 @@ AUTHENTICATION_BACKENDS = [
 
 ]
 
+
+THUMBNAIL_DEBUG = True
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
@@ -62,6 +65,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'images.apps.ImagesConfig',
+    'sorl.thumbnail',
+
 ]
 
 MIDDLEWARE = [

@@ -13,6 +13,8 @@ class Image(models.Model):
     created = models.DateField(auto_now_add=True, db_index=True) # Аргумент db_index=True говорит Django о необходимости создать индекс по этому полю
 
     users_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='images_liked', blank=True) # отношение многие ко многим
+    """можно обращаться к связанным объектам в виде image.users_like.all() или из объекта 
+        пользователя user как user.images_likes.all()"""
 
     def __str__(self):
         return self.title
